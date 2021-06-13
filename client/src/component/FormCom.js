@@ -18,18 +18,20 @@ class FormCom extends Component {
                 <Form onSubmit={this.handleForm}>
                         {/* get city name */}
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label> Get City Information</Form.Label>
+                            <Form.Label> <h2>Get City Information</h2></Form.Label>
                             <Form.Control 
                             type="text" 
                             placeholder="Enter City Name" 
                             name="cityName" 
                             custom
-                            // size={''}
+                            // size={'md-6'}
                             />
-                        </Form.Group>   
-                        <Button variant="primary" type="submit">
+                        <Button 
+                        variant="danger" 
+                        type="submit">
                         Explore City!
                         </Button>
+                        </Form.Group>   
                 </Form>
             </div>
         )

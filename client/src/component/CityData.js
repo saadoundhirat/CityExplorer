@@ -12,22 +12,25 @@ class cityData extends Component {
         return (
             <div>
                 {/* city data */}
-                   { this.props.cityData && <Container>
+
+                {/* this.props.cityData this will return undefined */}
+                {this.props.displayCityData &&
+                <Container>
                     <h3>City Information City:{this.props.cityData?.display_name} </h3>
                     <h4>City Information Lat:{this.props.cityData?.lat}</h4>
-                    <h4>City Information Lat:{this.props.cityData?.lon}</h4>
-                   </Container>
-                   }
-
+                    <h4>City Information Lon:{this.props.cityData?.lon}</h4>
 
                 {/* map date */}
-                <Container >
                         <Row>
                             <Col xs={6} md={4}>
                             <Image src={this.props.mapData} rounded />
                             </Col>
                         </Row>
+          
                 </Container>
+                }
+
+
                 {/* error massage */}
                 {this.props.displayErrMsg && <Container >
                         <Alert  

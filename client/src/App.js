@@ -4,6 +4,9 @@ import FormCom from './component/FormCom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import CityData from './component/CityData';
+import Header from './component/Header';
+import Footer from './component/Footer';
+
 
 class App extends Component {
 
@@ -12,7 +15,8 @@ class App extends Component {
     this.state={
       cityData:{},
       mapData:'',
-      displayErrMsg:false
+      displayErrMsg:false,
+      displayCityData:true
 
     }
   }
@@ -39,9 +43,10 @@ class App extends Component {
             }
        }
        catch(err){
+
          this.setState({
-          errorMsg:'we cant handle the requiest',
-          displayErrMsg:true
+          displayErrMsg:true,
+          displayCityData:false
          })
 
         if ( err.response.status === 404) {
@@ -59,16 +64,22 @@ class App extends Component {
   render() {
     return (
       <div>
-         <FormCom
-            getCityName={this.getCityName}
+         <Header/>
+      <div className="formInfo">
+            <FormCom
+                getCityName={this.getCityName}
 
-         />
+            />
 
-         <CityData 
-              cityData={this.state.cityData}
-              mapData={this.state.mapData}
-              displayErrMsg={this.state.displayErrMsg}
-         />
+            <CityData 
+                  cityData={this.state.cityData}
+                  mapData={this.state.mapData}
+                  displayErrMsg={this.state.displayErrMsg}
+                  displayCityData={this.state.displayCityData}
+            />
+      </div>
+
+         <Footer/>
       </div>
     )
   }
