@@ -16,9 +16,9 @@ class cityData extends Component {
                 {/* this.props.cityData this will return undefined */}
                 {this.props.displayCityData &&
                 <Container>
-                    <h3>City Information City:{this.props.cityData?.display_name} </h3>
-                    <h4>City Information Lat:{this.props.cityData?.lat}</h4>
-                    <h4>City Information Lon:{this.props.cityData?.lon}</h4>
+                    <h3>City Name:{this.props.cityData?.display_name} </h3>
+                    <h4>City Lat:{this.props.cityData?.lat}</h4>
+                    <h4>City Lon:{this.props.cityData?.lon}</h4>
 
                 {/* map date */}
                         <Row>
