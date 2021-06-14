@@ -15,6 +15,8 @@ const PORT= process.env.PORT || 4020;
 
 // http://localhost:4000/
     server.get('/' , landingRoute)
+// http://localhost:4000/
+    server.get('/test' , handleTestRoute)
 // http://localhost:4000/weathercity
     server.get('/checkcity' , handleCheckCity)
 // http://localhost:4000/weather
@@ -26,8 +28,14 @@ const PORT= process.env.PORT || 4020;
 // landingRoute 
 
 function landingRoute (req,res){
-    response.status(200).send(" Landing Routes HERE");
+    res.status(200).send(" Landing Routes HERE");
 }
+
+// handleTestRoute 
+function handleTestRoute(req,res){
+    res.send('server works coorect');
+}
+
 // ============================================================
 //handleCheckCity
 //http://localhost:4020/checkcity?searchQuery=Amman
