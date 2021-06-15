@@ -44,4 +44,4 @@ Start time: __2pm__
 
 Finish time: __5pm__
 
-Actual time needed to complete: __3hours__
+
