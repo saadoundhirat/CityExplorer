@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "intro to nodejs",
   "main": "server.js",
-  "type":"module",
   "scripts": {
     "start": "nodemon server.js"
   },
@@ -14,5 +13,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.7"
   }
 }
