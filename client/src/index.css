@@ -69,3 +69,16 @@ body div{
 .formInfo {
   margin-left: 25rem;
 }
+
+
+/* show buttons */
+.showButtons{
+  margin-left:22rem;
+  margin-bottom: 3rem;
+}
+.massge{
+  font-size: 3rem;
+  margin:1rem auto;
+  text-align:center;
+  
+}
