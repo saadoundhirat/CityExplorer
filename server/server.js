@@ -6,7 +6,8 @@ require('dotenv').config()
 // 😏😏😏build server 
 const server = express();
 server.use(cors());
-const PORT= process.env.PORT || 4020;
+const PORT= process.env.PORT || 5000;
+
 
 
 
@@ -48,7 +49,9 @@ function handleCheckCity(req,res){
                 return element;
             }
         })    
-        if(cityFound){
+        console.log(typeof cityFound)
+        if(cityFound!==undefined){
+            console.log(typeof cityFound)
             let retObject= {
                 citycheck:true,
                 cityname: cityFound.city_name,
@@ -56,51 +59,59 @@ function handleCheckCity(req,res){
                 lat:cityFound.lat
             }
             res.status(200).send(retObject);
+        }else if(cityFound===undefined){
+            let retErrObject = {
+                citycheck:false,
+                errMsg:`city ${cityName} not found use (Amman,Paris,Seattle)`
+            }
+            res.send(`your ${cityName} not found` , retErrObject);
+        }else{
+            res.status(404).send(`your ${cityName} not found`)
         }
 
     }catch{
-            // let retErrObject = {
-            //     citycheck:false,
-            //     errMsg:`city ${cityName} not found use (Amman,Paris,Seattle)`
-            // }
-            res.status(404).send(" your city not found");
-        
+        let retErrObject = {
+            citycheck:false,
+            errMsg:`city ${cityName} not found use (Amman,Paris,Seattle)`
+        }
+            res.status(404).send(retErrObject)
     }
 }
 
 
 // ============================================================
 // handleWeather to get weather data for city name (amman)
-//http://localhost:5000/weather?searchQuery=Amman&lat=-33.87&lon=151.21
-// &lat=-33.87&lon=151.21
+//http://localhost:4050/weather?searchQuery=Amman&lat=31.95&lon=35.91
 function handleWeather (req,res){
     let lat = req.query.lat;
     let lon = req.query.lon;
-    let searchQuery = (req.query.searchQuery);
+    let searchQuery = req.query.searchQuery;
 
     try {
         
-        let weatherObject = weatherData.find(element =>{
-            // || (element.lat===lat && element.lat===lon)
-            if (element.city_name === searchQuery || (element.lat===lat && element.lat===lon)){
+        let weatherObject = weatherData.find((element) =>{
+    
+            if(searchQuery===element.city_name){
                 return element;
             }
         });
-
         let modeldData = weatherObject.data.map(element =>{
             return new forcast(element);
         })
-
+        
         // send res => weather front-end
-        res.send(modeldData);
+        if (weatherObject!==undefined || modeldData !==undefined ){
+            res.send(modeldData);
+        }else{
+            res.send("there is an error" , typeof weatherObject);
+        }
         
     }catch{
-        if (weatherObject.length === 0){
-            res.status(404).send("city information not found");
-        }else{
-            res.status(500).send("cant Solve the request");
-        }
-
+        let retErrObject = {
+            weatherData:"undefined",
+            errMsg:`city not found use (Amman,Paris,Seattle) ???????`
+            }
+            res.status(404).send(retErrObject)
     }
 
 }
