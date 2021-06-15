@@ -1,89 +1,118 @@
 import React, { Component } from 'react'
-import './App.css';
-import FormCom from './component/FormCom';
+// import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import CityData from './component/CityData';
 import Header from './component/Header';
 import Footer from './component/Footer';
+import Lab06 from './component/Lab06';
+import Lab07 from './component/Lab07';
+
+import {
+  Button,
+  ButtonGroup
+  } from 'react-bootstrap/'
 
 
 
-class App extends Component {
+export class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      cityData:{},
-      mapData:'',
-      displayErrMsg:false,
-      displayCityData:true
 
+    this.state = {
+      lab06:false,
+      lab07:false,
+      lab08:false,
+      lab09:false,
     }
   }
 
-  // function HIT API
-  getCityName= async (cityName)=>{
-
-      const KEY ='pk.2433e0d8b4747553f8c640bd57b85df3';
-      let URL =`https://eu1.locationiq.com/v1/search.php?key=${KEY}&q=${cityName}&format=json`;
-
-
-      //  get data
-      try{
-            let result = await axios.get(URL);
-            // GET STATIC MAP (IMG)
-            let cityObject =result.data[0];
-
-            if(cityObject){
-                let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${KEY}&center=${cityObject.lat},${cityObject.lon}`;
-                this.setState({
-                  cityData: result.data[0],
-                  mapData:mapURL
-                })
-            }
-       }
-       catch(err){
-
-         this.setState({
-          displayErrMsg:true,
-          displayCityData:false
-         })
-
-        if ( err.response.status === 404) {
-          alert("Not Found.");
-          return err;
-        } else {
-          throw err;
-        }
-
-      }
-
+  showlab06=()=>{
+    this.setState({
+      lab06:true
+    })
+  }  
+  showlab07=()=>{
+    this.setState({
+      lab07:true
+    })
+  } 
+   showlab08=()=>{
+    this.setState({
+      lab08:true
+    })
+  } 
+   showlab09=()=>{
+    this.setState({
+      lab09:true
+    })
   }
+
 
 
   render() {
     return (
       <div>
-         <Header/>
-      <div className="formInfo">
-            <FormCom
-                getCityName={this.getCityName}
+        <Header/>
+        <div className="massge"> CLICK ON THE LAB BUTTON TO RENDER THE SOLUTION</div>
+        <ButtonGroup size="lg" className="showButtons" m>
 
-            />
+                       <Button 
+                        variant="danger" 
+                        type="submit"
+                        onClick={this.showlab06}
+                        >
+                        Render Lab06!
+                        </Button>   
 
-            <CityData 
-                  cityData={this.state.cityData}
-                  mapData={this.state.mapData}
-                  displayErrMsg={this.state.displayErrMsg}
-                  displayCityData={this.state.displayCityData}
-            />
-      </div>
+                        <Button 
+                        variant="warning" 
+                        type="submit"
+                        onClick={this.showlab07}
+                        >
+                        Render LAB07!
+                        </Button>  
 
-         <Footer/>
-      </div>
+                        <Button 
+                        variant="success" 
+                        type="submit"
+                        onClick={this.showlab08}
+                        >
+                        Render LAB08!
+                        </Button>   
+
+                        <Button 
+                        variant="info" 
+                        type="submit"
+                        onClick={this.showlab09}
+                        >
+                        Render LAB09!
+                        </Button>    
+            </ButtonGroup>
+                
+
+        {this.state.lab06 &&       
+           <Lab06/>
+         }  
+
+          {this.state.lab07 &&       
+           <Lab07/>
+         }   
+{/* 
+        {this.state.lab06 &&       
+           <Lab08/>
+         }   
+
+         {this.state.lab06 &&       
+            <Lab09/>
+         }    */}
+
+        <Footer/>
+
+        </div>
     )
   }
-}
+  }
 
-export default App
+
+export default App;
+
