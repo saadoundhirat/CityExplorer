@@ -3,14 +3,6 @@ import axios from 'axios';
 import FormCOM from './weatherCOM/FormCOM'
 import ShowStaticData from './weatherCOM/ShowStaticData'
 import Error from './locationCOM/Error'
-import ShowApiData from './weatherCOM/ShowApiData'
-// import {
-//     Container,
-//     // Col,
-//     // Row,
-//     // Image
-//     } from 'react-bootstrap/'
-
 
 export class Lab07 extends Component {
 
@@ -22,8 +14,6 @@ export class Lab07 extends Component {
             cityNameStatic:'',
             cityNameStaticErr:{},
             cityNameStaticErrFlag:false,
-            apiCityData:{},
-            showApiData:false
 
         }
     }
@@ -58,15 +48,16 @@ export class Lab07 extends Component {
 //   😎😋😋😊😋😋😋😊 get data from api 
 
 getCityNameApi=(cityName)=>{
-    console.log(cityName)
+    
     let backServer=process.env.REACT_APP_SERVER;
-    let URL=`${backServer}/apiWeather?searchQuery=${cityName}`
+    let URL=`${backServer}/apiWeather?city=${cityName}`
 
     axios.get(URL)
     .then((result)=>{
+
         this.setState({
-            apiCityData:result.data,
-            showApiData:true
+            staticCityData:result.data,
+            renderStaticData:true
         })
     })
     .catch((err)=>{
