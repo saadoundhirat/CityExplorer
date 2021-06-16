@@ -82,6 +82,10 @@ body div{
   text-align:center;
   
 }
-.card-deck {
+.card {
   margin:1.5rem 2rem;
+  height: fit-content;
+}
+.card-img-top{
+  height:250px;
 }
