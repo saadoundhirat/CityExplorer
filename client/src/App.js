@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-// import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './component/Header';
 import Footer from './component/Footer';
 import Lab06 from './component/Lab06';
 import Lab07 from './component/Lab07';
+import Lab08 from './component/Lab08';
 
 import {
   Button,
@@ -22,7 +22,6 @@ export class App extends Component {
       lab06:false,
       lab07:false,
       lab08:false,
-      lab09:false,
     }
   }
 
@@ -41,12 +40,6 @@ export class App extends Component {
       lab08:true
     })
   } 
-   showlab09=()=>{
-    this.setState({
-      lab09:true
-    })
-  }
-
 
 
   render() {
@@ -61,7 +54,7 @@ export class App extends Component {
                         type="submit"
                         onClick={this.showlab06}
                         >
-                        Render Lab06!
+                        Check Location !
                         </Button>   
 
                         <Button 
@@ -69,7 +62,7 @@ export class App extends Component {
                         type="submit"
                         onClick={this.showlab07}
                         >
-                        Render LAB07!
+                        Check Weather !
                         </Button>  
 
                         <Button 
@@ -77,16 +70,9 @@ export class App extends Component {
                         type="submit"
                         onClick={this.showlab08}
                         >
-                        Render LAB08!
+                        Check Movies !
                         </Button>   
-
-                        <Button 
-                        variant="info" 
-                        type="submit"
-                        onClick={this.showlab09}
-                        >
-                        Render LAB09!
-                        </Button>    
+   
             </ButtonGroup>
                 
 
@@ -96,15 +82,10 @@ export class App extends Component {
 
           {this.state.lab07 &&       
            <Lab07/>
-         }   
-{/* 
-        {this.state.lab06 &&       
+         }  
+         {this.state.lab08 &&       
            <Lab08/>
          }   
-
-         {this.state.lab06 &&       
-            <Lab09/>
-         }    */}
 
         <Footer/>
 
