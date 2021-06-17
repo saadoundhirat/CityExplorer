@@ -2,26 +2,28 @@ const axios =require('axios');
 // movies handler 
 // http://localhost:4006/movies?searchQuery=....
 // https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&searchQuery=AMMAN
+let myMemorie ={};
 function handleMovies (req, res){
     let key= process.env.MOVIES_KEY;
-    let cityName= req.query.searchQuery;
+    let cityName= req.query.searchQuery.toLowerCase();
     // let Url=https://api.themoviedb.org/3/search/movie?api_key=<>&query=${cityName}
     let URL= `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${cityName}`;
 
-    axios.get(URL).then(movObj=>{
-        // res.status(200).send(movObj.data);
-
-        let retData = movObj.data.results.map(element=>{
-            return new movies(element);
+    if (myMemorie[cityName] !== undefined) {
+        res.status(200).send(myMemorie[cityName])
+    }else{
+        axios.get(URL).then(movObj=>{
+            let retData = movObj.data.results.map(element=>{
+                return new movies(element);
+            })
+            myMemorie[cityName]=retData;
+            res.status(200).send(retData);
         })
-        // console.log(retData)
-        res.status(200).send(retData);
+        .catch(err=>{
+            res.status(500).send(err.massage)
+        })
+    }
 
-    })
-    .catch(err=>{
-        console.log(' catch an error',err)
-        res.status(500).send(err.massage)
-    })
 }
 
 class movies {
